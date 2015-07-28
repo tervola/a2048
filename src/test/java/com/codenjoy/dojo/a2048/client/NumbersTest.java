@@ -50,6 +50,25 @@ public class NumbersTest {
                 "+2++\n",
                 action);
     }
+    @Test
+    public void simpleMove_caseMoveAllXPositions(){
+        //given
+        String board =
+                "+++2" +
+                "++2+" +
+                "+2++" +
+                "2+++";
+        //when
+        String action =  move(board, Direction.DOWN);
+
+        //then
+        assertEquals(
+                "++++\n" +
+                "++++\n" +
+                "++++\n" +
+                "2222\n",
+                action);
+    }
 
     private String move(String board, Direction direction) {
         //convert String bord  -> char[][]
@@ -63,14 +82,13 @@ public class NumbersTest {
     }
 
     private char[][] moveLogic(char[][] field, Direction direction) {
-        int x =1; //TODO think about it
-        for (int y = SIZE-1; y >0 ; y--) {
-            if(field[x][y]=='2')
-            {
-                field[x][y] = '+';
-                field[x][SIZE-1] = '2';
+        for (int x = 1; x < SIZE; x++){
+            for (int y = SIZE - 1; y >= 0; y--) {
+                if (field[x][y] == '2') {
+                    field[x][y] = '+';
+                    field[x][SIZE - 1] = '2';
+                }
             }
-
         }
 
         return field;
