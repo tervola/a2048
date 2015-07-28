@@ -69,7 +69,25 @@ public class NumbersTest {
                 "2222\n",
                 action);
     }
+    @Test
+    public void simpleMove_caseMoveAllXPositions4th(){
+        //given
+        String board =
+                "+++4" +
+                "++4+" +
+                "+4++" +
+                "4+++";
+        //when
+        String action =  move(board, Direction.DOWN);
 
+        //then
+        assertEquals(
+                "++++\n" +
+                "++++\n" +
+                "++++\n" +
+                "4444\n",
+                action);
+    }
     private String move(String board, Direction direction) {
         //convert String bord  -> char[][]
         char[][] field =  convertFromString(board);
@@ -84,9 +102,10 @@ public class NumbersTest {
     private char[][] moveLogic(char[][] field, Direction direction) {
         for (int x = 1; x < SIZE; x++){
             for (int y = SIZE - 1; y >= 0; y--) {
-                if (field[x][y] == '2') {
+                if ( Character.isDigit(field[x][y])) {
+                    char dig = field[x][y];
                     field[x][y] = '+';
-                    field[x][SIZE - 1] = '2';
+                    field[x][SIZE - 1] = dig;
                 }
             }
         }
