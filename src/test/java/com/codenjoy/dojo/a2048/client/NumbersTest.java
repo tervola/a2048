@@ -70,7 +70,7 @@ public class NumbersTest {
                 action);
     }
     @Test
-    public void simpleMove_caseMoveAllXPositions4th(){
+      public void simpleMove_caseMoveAllXPositions4th(){
         //given
         String board =
                 "+++4" +
@@ -88,6 +88,46 @@ public class NumbersTest {
                 "4444\n",
                 action);
     }
+
+       @Test
+    public void add2_caseSumm2th(){
+        //given
+        String board =
+                "++++" +
+                "++++" +
+                "+2++" +
+                "+2++";
+        //when
+        String action =  move(board, Direction.DOWN);
+
+        //then
+        assertEquals(
+                "++++\n" +
+                "++++\n" +
+                "++++\n" +
+                "+4++\n",
+                action);
+    }
+    @Test
+    public void add2_caseSumm2th_thr(){
+        //given
+        String board =
+                "++++" +
+                "++++" +
+                "+2++" +
+                "+2++";
+        //when
+        String action =  move(board, Direction.DOWN);
+
+        //then
+        assertEquals(
+                "++++\n" +
+                "++++\n" +
+                "++++\n" +
+                "+4++\n",
+                action);
+    }
+
     private String move(String board, Direction direction) {
         //convert String bord  -> char[][]
         char[][] field =  convertFromString(board);
@@ -105,8 +145,12 @@ public class NumbersTest {
                 if ( Character.isDigit(field[x][y])) {
                     char dig = field[x][y];
                     field[x][y] = '+';
+                    if (field[x][SIZE - 1] == '2' && dig == '2'){
+                        dig = '4';
+                    }
                     field[x][SIZE - 1] = dig;
                 }
+
             }
         }
 
